@@ -13,12 +13,16 @@ const Gameboard = (function() {
     [" ", " ", " "]
   ];
 
-  const set_at = function(x, y, symbol) {
+  const setAt = function(coords, symbol) {
+    x = coords[0];
+    y = coords[1];
     if (x > 3 || y > 3) return false;
     board[x][y] = symbol;
   }
 
-  const at = function(x, y) {
+  const at = function(coords) {
+    x = coords[0];
+    y = coords[1];
     if (x > 3 || y > 3) return false;
     return board[x][y];
   }
