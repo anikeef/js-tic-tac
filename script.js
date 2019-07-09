@@ -9,15 +9,19 @@ const Gameboard = (function() {
 
   const board = [
     [" ", " ", " "],
-    [" ", " ", " "], 
+    [" ", " ", " "],
     [" ", " ", " "]
   ];
 
   const set_at = function(x, y, symbol) {
+    if (x > 3 || y > 3) return false;
     board[x][y] = symbol;
   }
 
   const at = function(x, y) {
+    if (x > 3 || y > 3) return false;
     return board[x][y];
   }
+
+  return {set_at, at};
 })();
