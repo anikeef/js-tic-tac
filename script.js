@@ -33,3 +33,23 @@ const Gameboard = (function() {
 
   return {setAt, at, isEmpty};
 })();
+
+// The TicTacGame factory function creates objects that provide
+// game logic around the GameBoard module. It takes two Player objects
+// as parameters and actively uses their methods to make moves
+
+const TicTacGame = function(playerX, playerO) {
+  let currentPlayer = playerX;
+
+  const nextPlayer = function() {
+    currentPlayer = (currentPlayer === playerX) ? playerO : playerX;
+  }
+
+  const move = function() {
+    let coords = currentPlayer.inputMove();
+    if (Gameboard.isEmpty(coords)) {
+      Gameboard.setAt(coords, currentPlayer.symbol)
+    }
+    nextPlayer();
+  }
+}
