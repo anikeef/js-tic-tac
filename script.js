@@ -27,5 +27,9 @@ const Gameboard = (function() {
     return board[x][y];
   }
 
-  return {set_at, at};
+  const isEmpty = function(coords) {
+    return at(coords) === " ";
+  }
+
+  return {setAt, at, isEmpty};
 })();
