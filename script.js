@@ -38,11 +38,11 @@ const Gameboard = (function() {
 // game logic around the GameBoard module. It takes two Player objects
 // as parameters and actively uses their methods to make moves
 
-const TicTacGame = function(playerX, playerO) {
+const TicTacGame = function(playerX, player0) {
   let currentPlayer = playerX;
 
   const nextPlayer = function() {
-    currentPlayer = (currentPlayer === playerX) ? playerO : playerX;
+    currentPlayer = (currentPlayer === playerX) ? player0 : playerX;
   }
 
   const move = function() {
@@ -52,4 +52,22 @@ const TicTacGame = function(playerX, playerO) {
     }
     nextPlayer();
   }
+
+  return {move};
 }
+
+const Player = function(symbol) {
+
+  // !!!Temporary version
+  const inputMove = function() {
+    input = prompt("Enter your move (e.g. 00 - left bottom cell):");
+    if ((/^\d{2}$/).test(input)) {
+      return input.split("").map((n) => Number(n));
+    }
+    return false;
+  }
+
+  return {inputMove, symbol};
+}
+
+let game = TicTacGame(Player("x"), Player("0"));
