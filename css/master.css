@@ -1,8 +1,26 @@
-.cells {
-  width: 300px;
-  height: 300px;
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Raleway, sans-serif;
+  box-sizing: border-box;
 }
 
-.cells td {
-  background-color: black;
+body {
+  background-color: rgb(243, 243, 243);
+}
+
+.cells {
+  margin: 20px auto;
+  width: 300px;
+  height: 300px;
+  table-layout: fixed;
+  font-size: 30px;
+  border-collapse: collapse;
+}
+
+.cell {
+  // border: 1px solid #999;
+  text-align: center;
+  background-color: white;
+  line-height: 0;
 }
