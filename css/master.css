@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(243,243,243);
 }
 
 .cells {
@@ -14,17 +14,18 @@ body {
   width: 300px;
   height: 300px;
   table-layout: fixed;
-  font-size: 30px;
   border-collapse: collapse;
+  font-size: 30px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0, .05);
 }
 
 .cell {
   height: 100px;
   text-align: center;
-  background-color: white;
   line-height: 100%;
 }
 
 .cell-mouseover {
-  color: rgb(200, 200, 200);
+  color: rgb(200,200,200);
 }
