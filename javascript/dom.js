@@ -4,16 +4,24 @@ const TicTacGUI = (function() {
   const cells = document.querySelectorAll(".cell")
   renderGame();
 
+  // Listen for user moves
+
   cellsContainer.addEventListener("click", (e) => {
-    coords = e.target.id.split("").map((n) => Number(n)); // => [int, int]
+    coords = cellCoords(e.target); // => [int, int]
     game.move(coords);
     console.log(coords);
     renderGame();
   })
 
+  // Return coords array of given DOM element (e.g. [0, 0])
+
+  function cellCoords(element) {
+    return element.id.split("").map((n) => Number(n));
+  }
+
   function renderGame() {
     cells.forEach((cell) => {
-      coords = cell.id.split("").map((n) => Number(n));
+      coords = cellCoords(cell);
       symbol = Gameboard.at(coords);
       cell.innerHTML = symbol;
     })
