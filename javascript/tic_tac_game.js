@@ -10,13 +10,14 @@ const TicTacGame = function(playerX, player0) {
   }
 
   // Waits for current player to input move and changes the state of game
-  
-  const move = function() {
-    let coords = currentPlayer.inputMove();
-    // coords here checks that input is valid
-    if (coords && Gameboard.isEmpty(coords)) {
+
+  const move = function(coords) {
+    if (Gameboard.isEmpty(coords)) {
       Gameboard.setAt(coords, currentPlayer.symbol);
       nextPlayer();
+      if (currentPlayer.isAI) {
+        // do stuff
+      }
       return true;
     }
     return false;

@@ -1,0 +1,8 @@
+.cells {
+  width: 300px;
+  height: 300px;
+}
+
+.cells td {
+  background-color: black;
+}

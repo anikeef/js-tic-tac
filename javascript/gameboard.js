@@ -16,7 +16,7 @@ const Gameboard = (function() {
   const setAt = function(coords, symbol) {
     x = coords[0];
     y = coords[1];
-    if (x > 3 || y > 3) return false;
+    if (x > 2 || y > 2) return false;
     board[x][y] = symbol;
   }
 
