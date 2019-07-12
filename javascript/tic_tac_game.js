@@ -23,5 +23,9 @@ const TicTacGame = function(playerX, player0) {
     return false;
   }
 
-  return {move};
+  const currentSymbol = function() {
+    return currentPlayer.symbol;
+  }
+
+  return {move, currentSymbol};
 }

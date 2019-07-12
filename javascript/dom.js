@@ -7,10 +7,28 @@ const TicTacGUI = (function() {
   // Listen for user moves
 
   cellsContainer.addEventListener("click", (e) => {
-    coords = cellCoords(e.target); // => [int, int]
+    coords = cellCoords(e.target);
+    e.target.classList.remove("cell-mouseover");
     game.move(coords);
-    console.log(coords);
     renderGame();
+  })
+
+  // These two listeners create the effect of move preview
+
+  cellsContainer.addEventListener("mouseover", (e) => {
+    coords = cellCoords(e.target);
+    if (Gameboard.isEmpty(coords)) {
+      e.target.classList.add("cell-mouseover");
+      e.target.innerHTML = game.currentSymbol();
+    }
+  })
+
+  cellsContainer.addEventListener("mouseout", (e) => {
+    coords = cellCoords(e.target);
+    if (Gameboard.isEmpty(coords)) {
+      e.target.classList.remove("cell-mouseover");
+      e.target.innerHTML = " ";
+    }
   })
 
   // Return coords array of given DOM element (e.g. [0, 0])
