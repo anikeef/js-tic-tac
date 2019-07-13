@@ -27,5 +27,28 @@ const TicTacGame = function(playerX, player0) {
     return currentPlayer.symbol;
   }
 
-  return {move, currentSymbol};
+  const isOver = function() {
+    let lines = [ // Rows
+      [[0, 0], [1, 0], [2, 0]],
+      [[0, 1], [1, 1], [2, 1]],
+      [[0, 2], [1, 2], [2, 2]],
+      // Columns
+      [[0, 0], [0, 1], [0, 2]],
+      [[1, 0], [1, 1], [1, 2]],
+      [[2, 0], [2, 1], [2, 2]],
+      // Diagonals
+      [[0, 0], [1, 1], [2, 2]],
+      [[0, 2], [1, 1], [2, 0]]
+    ];
+    for (let line of lines) {
+      if (Gameboard.isEmpty(line[0])) continue;
+      firstSymbol = Gameboard.at(line[0]);
+      if (line.every((coords) => Gameboard.at(coords) === firstSymbol)) {
+        return firstSymbol;
+      }
+    }
+    return false;
+  }
+
+  return {move, currentSymbol, isOver};
 }
