@@ -4,13 +4,14 @@
 
 const TicTacGame = function(playerX, player0) {
   let currentPlayer = playerX;
+  const currentSymbol = () => currentPlayer.symbol; // GUI facility
 
   // The gameState object holds info about current game state. Possible status
   // values are "continue", "over" or "draw". This object can be changed
-  // only via changeState function which is called after each move() call
+  // only via changeState function which is called after each move
 
   const gameState = {
-    status: "continue", // or "over", "draw"
+    status: "continue",
     movesCount: 0,
     winnerSymbol: null,
     winnerLine: null
@@ -39,6 +40,9 @@ const TicTacGame = function(playerX, player0) {
     }
     return false;
   }
+
+  // This function is called only after each move. It changes only the
+  // gameState object
 
   const changeState = function() {
     // Check if game is over by iterating through each line of 3 cells
@@ -72,8 +76,6 @@ const TicTacGame = function(playerX, player0) {
       return;
     }
   }
-
-  const currentSymbol = () => currentPlayer.symbol;
 
   return {move, currentSymbol, status, winnerLine, winnerSymbol};
 }
