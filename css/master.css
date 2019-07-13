@@ -26,6 +26,10 @@ body {
   line-height: 100%;
 }
 
+.cell:hover {
+  cursor: pointer;
+}
+
 .cell-mouseover {
   color: rgb(200,200,200);
 }

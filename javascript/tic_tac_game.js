@@ -5,6 +5,25 @@
 const TicTacGame = function(playerX, player0) {
   let currentPlayer = playerX;
 
+  // The gameState object holds info about current game state. Possible status
+  // values are "continue", "over" or "draw". This object can be changed
+  // only via changeState function which is called after each move() call
+
+  const gameState = {
+    status: "continue", // or "over", "draw"
+    movesCount: 0,
+    winnerSymbol: null,
+    winnerLine: null
+  }
+
+  // Read-only access to gameState object for outside usage
+
+  const status = () => gameState.status;
+  const winnerSymbol = () => gameState.winnerSymbol;
+  const winnerLine = () => gameState.winnerLine;
+
+  // Switch players (this function is used only inside move() function)
+
   const nextPlayer = function() {
     currentPlayer = (currentPlayer === playerX) ? player0 : playerX;
   }
@@ -14,20 +33,15 @@ const TicTacGame = function(playerX, player0) {
   const move = function(coords) {
     if (Gameboard.isEmpty(coords)) {
       Gameboard.setAt(coords, currentPlayer.symbol);
+      changeState();
       nextPlayer();
-      if (currentPlayer.isAI) {
-        // do stuff
-      }
       return true;
     }
     return false;
   }
 
-  const currentSymbol = function() {
-    return currentPlayer.symbol;
-  }
-
-  const isOver = function() {
+  const changeState = function() {
+    // Check if game is over by iterating through each line of 3 cells
     let lines = [ // Rows
       [[0, 0], [1, 0], [2, 0]],
       [[0, 1], [1, 1], [2, 1]],
@@ -40,15 +54,26 @@ const TicTacGame = function(playerX, player0) {
       [[0, 0], [1, 1], [2, 2]],
       [[0, 2], [1, 1], [2, 0]]
     ];
+
     for (let line of lines) {
       if (Gameboard.isEmpty(line[0])) continue;
       firstSymbol = Gameboard.at(line[0]);
       if (line.every((coords) => Gameboard.at(coords) === firstSymbol)) {
-        return firstSymbol;
+        gameState.winnerSymbol = firstSymbol;
+        gameState.winnerLine = line;
+        gameState.status = "over";
+        return;
       }
     }
-    return false;
+    // Increase moves count and check if it's a draw
+    ++gameState.movesCount;
+    if (gameState.movesCount === 9) {
+      gameState.status = "draw";
+      return;
+    }
   }
 
-  return {move, currentSymbol, isOver};
+  const currentSymbol = () => currentPlayer.symbol;
+
+  return {move, currentSymbol, status, winnerLine, winnerSymbol};
 }

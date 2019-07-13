@@ -11,7 +11,6 @@ const TicTacGUI = (function() {
     e.target.classList.remove("cell-mouseover");
     game.move(coords);
     renderGame();
-    console.log(game.isOver());
   })
 
   // These two listeners create the effect of move preview
